@@ -12,3 +12,10 @@ export function addTodo(text) {
         text
     }
 }
+
+export function toggleFilter(value) {
+    return {
+        type: 'TOGGLE_FILTER',
+        value
+    }
+}

@@ -22,7 +22,8 @@ const initialState = {
             text: 'Filter todos by text',
             done: false
         }
-    ]
+    ],
+    filter: ''
 };
 
 function todoChangeHandler(state, change) {
@@ -41,6 +42,9 @@ function todoChangeHandler(state, change) {
                     break;
                 }
             }
+            break;
+        case 'TOGGLE_FILTER':
+            state.filter = change.value;
             break;
     }
 }

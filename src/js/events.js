@@ -1,6 +1,6 @@
 import {todos} from './state';
 import {listen} from './lib/events';
-import {addTodo, toggleTodoState} from './actions';
+import {addTodo, toggleTodoState, toggleFilter} from './actions';
 
 export function registerEventHandlers() {
     listen('click', '#addTodo', event => {
@@ -19,5 +19,9 @@ export function registerEventHandlers() {
     	if (event.keyCode == 13) {
     		document.getElementById('addTodo').click();
     	}
+    });
+
+    listen('change', '[name="done"]', event => {
+    	todos.dispatch( toggleFilter( document.querySelector('input[name="done"]:checked').value ) );
     });
 }

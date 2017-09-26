@@ -13,4 +13,10 @@ export function registerEventHandlers() {
         const id = Number.parseInt(event.target.getAttribute('data-id'), 10);
         todos.dispatch(toggleTodoState(id));
     });
+    
+    listen('keyup', '#todoInput', event => {
+    	if (event.keyCode == 13) {
+    		document.getElementById('addTodo').click();
+    	}
+    });
 }

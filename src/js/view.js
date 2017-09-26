@@ -11,8 +11,9 @@ export function render(el, state) {
 
 function renderApp(input, todoList, filter) {
     if(isEnabled('renderBottom')) {
-        return `${renderAddTodoAtBottom(input, todoList)}
-                ${isEnabled('filter') ? renderFilter(filter) : ''}`;
+        return `${isEnabled('filter') && isEnabled('filterTop') ? renderFilter(filter) : ''}
+                ${renderAddTodoAtBottom(input, todoList)}
+                ${isEnabled('filter') && !isEnabled('filterTop') ? renderFilter(filter) : ''}`;
     } else {
         return `${renderAddTodoAtTop(input, todoList)}
                 ${isEnabled('filter') ? renderFilter(filter) : ''}`;

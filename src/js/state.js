@@ -1,7 +1,8 @@
 import {createStore} from './lib/state';
 
 const initialState = {
-    todos: [
+    todos: JSON.parse(localStorage.getItem("todos")) || null
+    /*[
         {
             id: 0,
             text: 'Take a look at the application',
@@ -22,7 +23,7 @@ const initialState = {
             text: 'Filter todos by text',
             done: false
         }
-    ],
+    ]*/,
     filter: ''
 };
 
@@ -34,6 +35,8 @@ function todoChangeHandler(state, change) {
                 text: change.text,
                 done: false
             });
+
+            localStorage.setItem("todos", JSON.stringify(state.todos) );
             break;
         case 'TODO_TOGGLE_DONE':
             for(let todo of state.todos) {
@@ -42,6 +45,8 @@ function todoChangeHandler(state, change) {
                     break;
                 }
             }
+
+            localStorage.setItem("todos", JSON.stringify(state.todos) );
             break;
         case 'TOGGLE_FILTER':
             state.filter = change.value;

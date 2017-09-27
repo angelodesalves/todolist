@@ -1,8 +1,6 @@
 import {createStore} from './lib/state';
 
-const initialState = {
-    todos: JSON.parse(localStorage.getItem("todos")) || null
-    /*[
+const todosDefault = [
         {
             id: 0,
             text: 'Take a look at the application',
@@ -23,7 +21,10 @@ const initialState = {
             text: 'Filter todos by text',
             done: false
         }
-    ]*/,
+    ];
+
+const initialState = {
+    todos: JSON.parse(localStorage.getItem("todos")) || todosDefault,
     filter: ''
 };
 

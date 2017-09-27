@@ -3,12 +3,85 @@ html, body, .todo {
     padding: 0;
 }
 
+#app{
+	font-family: verdana;
+	font-size: 14px;
+	padding: 20px;
+}
+
 .todo {
     list-style-type: none;
+    margin: 30px 0;
 }
 
 .todo__input, .todo__item {
-    margin: 10px;
+    margin: 15px 10px;
+}
+
+[type="checkbox"],
+[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="checkbox"] + label,
+[type="radio"] + label{
+    cursor: pointer;
+    line-height: 25px;
+    position: relative;
+}
+
+[type="checkbox"] + label{
+    display: block;
+	margin: 0 0 0 40px;
+}
+
+[type="radio"] + label{
+    display: inline-block;
+	margin: 0 15px 0 40px;
+}
+
+[type="checkbox"] + label:before,
+[type="radio"] + label:before {
+	border: 1px solid #b5b5b5;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    left: -35px;
+    top: 0;
+}
+
+[type="radio"] + label:before {
+	border-radius: 100%;
+}
+
+[type="checkbox"] + label:after,
+[type="radio"] + label:after {
+	content: "";
+	background: #8a8a8a;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: -31px;
+    top: 4px;
+    transition: all 0.2s ease;
+}
+
+[type="radio"] + label:after {
+	border-radius: 100%;
+}
+
+[type="checkbox"]:checked + label:after,
+[type="radio"]:checked + label:after {
+	transform: scale(1);
+}
+
+[type="checkbox"]:not(:checked) + label:after,
+[type="radio"]:not(:checked) + label:after {
+	transform: scale(0);
 }
 
 .todo__item--done {
@@ -17,4 +90,23 @@ html, body, .todo {
 
 #addTodo {
     margin-left: 10px;
+}
+
+#todoInput{
+	border: none;
+    border-bottom: 1px solid #b5b5b5;
+    height: 25px;
+    padding: 2px 6px;
+    flex: 1 100%;
+}
+
+.todo__input {
+    display: flex;
+}
+
+#addTodo{
+	border: 1px solid #b5b5b5;
+    background: none;
+    padding: 6px 15px;
+    color: #5f5f5f;
 }

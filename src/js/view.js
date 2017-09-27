@@ -11,26 +11,26 @@ export function render(el, state) {
 
 function renderApp(input, todoList, filter) {
     if(isEnabled('renderBottom')) {
-        return `${isEnabled('filter') && isEnabled('filterTop') ? renderFilter(filter) : ''}
-                ${renderAddTodoAtBottom(input, todoList)}
-                ${isEnabled('filter') && !isEnabled('filterTop') ? renderFilter(filter) : ''}`;
+        return renderAddTodoAtBottom(input, todoList, filter);
     } else {
-        return `${renderAddTodoAtTop(input, todoList)}
-                ${isEnabled('filter') ? renderFilter(filter) : ''}`;
+        return renderAddTodoAtTop(input, todoList, filter);
     }
 }
 
-function renderAddTodoAtTop(input, todoList) {
+function renderAddTodoAtTop(input, todoList, filter) {
     return `<div id="app">
         ${input}
         ${todoList}
+        ${isEnabled('filter') ? renderFilter(filter) : ''}
     </div>`;
 }
 
-function renderAddTodoAtBottom(input, todoList) {
+function renderAddTodoAtBottom(input, todoList, filter) {
     return `<div id="app">
+        ${isEnabled('filter') && isEnabled('filterTop') ? renderFilter(filter) : ''}
         ${todoList}
         ${input}
+        ${isEnabled('filter') && !isEnabled('filterTop') ? renderFilter(filter) : ''}
     </div>`;
 }
 
@@ -46,22 +46,25 @@ function renderTodoItem(todo, filter) {
     if( filter=='' || JSON.parse(filter)==todo.done ){
         const todoClass = `todo__item todo__item--${todo.done ? 'done' : 'open'}`;
         return `<li class="${todoClass}">
-            <input class="js_toggle_todo" type="checkbox" data-id="${todo.id}"${todo.done ? ' checked' : ''}>
-            ${todo.text}
+            <input class="js_toggle_todo" type="checkbox" id="todo-${todo.text}" data-id="${todo.id}"${todo.done ? ' checked' : ''}>
+            <label for="todo-${todo.text}">${todo.text}</label>
         </li>`;
     }
 }
 
 function renderFilter(filter) {
     return `
+            <input type="radio" name="done" id="done1" value="" ${filter=='' ? 'checked="true"' : ''}>
             <label for="done1">
-                <input type="radio" name="done" id="done1" value="" ${filter=='' ? 'checked="true"' : ''}> Mostrar todos
+                Mostrar todos
             </label>
+            <input type="radio" name="done" id="done2" value="false" ${filter=='false' ? 'checked="true"' : ''}>
             <label for="done2">
-                <input type="radio" name="done" id="done2" value="false" ${filter=='false' ? 'checked="true"' : ''}> Somente abertos
+                Somente abertos
             </label>
+            <input type="radio" name="done" id="done3" value="true" ${filter=='true' ? 'checked="true"' : ''}>
             <label for="done3">
-                <input type="radio" name="done" id="done3" value="true" ${filter=='true' ? 'checked="true"' : ''}> Somente fechados
+                Somente fechados
             </label>
         `;
 }

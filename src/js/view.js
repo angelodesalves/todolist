@@ -35,7 +35,7 @@ function renderAddTodoAtBottom(input, todoList, filter) {
 }
 
 function renderInput() {
-    return `<div class="todo__input"><input type="text" id="todoInput"><button id="addTodo">Add</button></div>`;
+    return `<div class="todo__input"><input type="text" id="todoInput" placeholder="Add a task"><button id="addTodo">Add</button></div>`;
 }
 
 function renderTodos(todoItems) {
